@@ -1,0 +1,17 @@
+# syntax = docker/dockerfile:1
+# Dev image: extends the base image via Compose additional_contexts (service:dynamic-pricing-base).
+# FROM base uses the locally built base service image; no registry pull.
+
+# If running without devcontainer, run the following commands before building the image:
+# export DEVELOPER_UID=$(id -u) && docker build -t dynamic-pricing-base ./dynamic-pricing/
+FROM dynamic-pricing-base AS dynamic-pricing-dev
+
+ARG DEVELOPER_UID=501
+
+RUN addgroup -g $DEVELOPER_UID developer \
+    && adduser -D -u $DEVELOPER_UID -G developer developer
+
+USER developer:developer
+
+EXPOSE 3000
+CMD ["sh", "-c", "./bin/rails db:prepare && ./bin/rails server -b 0.0.0.0"]

@@ -1,7 +1,7 @@
 // For format details, see https://containers.dev/implementors/json_reference/.
 // For config options, see the README at: https://github.com/devcontainers/templates/tree/main/src/ruby
 {
-  "name": "Tripla Interview Takehome Assignment",
+  "name": "TriplaInterview",
   "dockerComposeFile": "compose.yaml",
   "service": "devcontainer",
   "workspaceFolder": "/workspaces/",
@@ -10,19 +10,24 @@
     // for the following source path to work correctly when using devcontainers through vscode/cursor with WSL you will need to enable the user setting "dev.containers.executeInWSL"
     "source=~/.ssh,target=/home/developer/.ssh,type=bind,consistency=cached"
   ],
+  "remoteUser": "developer",
+  "updateRemoteUserUID": true,
+
+  // ensures the base image is built and tagged as dynamic-pricing-base before the development container is started
+  "initializeCommand": "export DEVELOPER_UID=$(id -u) && export DOCKER_GID=0$(ls -n /var/run/docker.sock | awk '{print $4}') && docker build -t dynamic-pricing-base ./dynamic-pricing/",
 
   // Important for docker-outside-of-docker feature to work with project docker compose
   "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
 
   // devcontainer features are not used: they require apt-based images; this image currently uses Alpine (and are a bit of a pain to debug)
   // The following features are recreated using equivalent functionality in the Dockerfile.dev, compose.yaml, and devcontainer.json settings.
-  // "features": {
+  "features": {
   //   "ghcr.io/devcontainers/features/github-cli:1": {},
   //   "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
   //     "moby": false,
   //     "dockerDashComposeVersion": "v2"
   //   }
-  // },
+  },
 
   "containerEnv": {
     "EDITOR": "code"
@@ -33,7 +38,7 @@
   },
 
   // Use 'postCreateCommand' to run commands after the container is created.
-  // "postCreateCommand": "",
+  "postCreateCommand": "export DEVELOPER_UID=$(id -u)",
   "customizations": {
     "vscode": {
       "extensions": [

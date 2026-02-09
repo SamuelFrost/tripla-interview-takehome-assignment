@@ -1,11 +1,13 @@
-name: "Tripla Interview Takehome Assignment"
+name: "TriplaInterview"
 services:
-
   dynamic-pricing:
-    image: dynamic-pricing
+    image: dynamic-pricing-dev
     build:
       context: ./dynamic-pricing/
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
+      args:
+        DEVELOPER_UID: ${DEVELOPER_UID:-501}
+    pull_policy: never
     working_dir: /workspaces/dynamic-pricing
     environment:
       # RAILS_LOG_TO_STDOUT: true
