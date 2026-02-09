@@ -26,6 +26,9 @@ Here is a list of common commands for building, running, and interacting with th
 
 ```bash
 
+# change to the dynamic-pricing directory
+cd dynamic-pricing/
+
 # --- 1. Build & Run The Main Application ---
 # Build the Docker image
 docker build -t interview-app .
