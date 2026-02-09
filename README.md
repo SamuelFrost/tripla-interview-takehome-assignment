@@ -1,60 +1,53 @@
-<div align="center">
-   <img src="/img/logo.svg?raw=true" width=600 style="background-color:white;">
-</div>
+# Tripla interview takehome assignment
 
-# Tripla Engineering: Take-Home Assignments
+This is a Ruby on Rails application that uses PostgreSQL as the database.
 
-Welcome\! This repository contains the take-home assignments we use for our technical hiring process at Tripla. Each exercise is designed to give you a feel for the kind of challenges we work on every day.
+## Getting Started
 
-## Frequently Asked Questions
+To get started with this project, you'll need to have a linux kernal OS and Docker installed on your machine. Windows users should use WSL2 (windows subsystem for linux). Mac and linux users should not need special steps beyond installing docker.
 
-### Which assignment should I work on?
+### Setup
 
-Please do not work on all of them. Your hiring manager will send you a direct link to the specific assignment you should complete.
+TODO: refine this to be more in line with a fully functioning project as opposed to a simple stand alone container
 
-If you are unsure which one to work on, please contact our talent acquisition team before you begin.
+## Development Environment Setup
 
-### How do I submit my solution?
+The project scaffold is a minimal Ruby on Rails application with a `/pricing` endpoint. While you're free to configure your environment as you wish, this repository is pre-configured for a Docker-based workflow that supports live reloading for your convenience.
 
-Please follow these steps to submit your work:
+The provided `Dockerfile` builds a container with all necessary dependencies. Your local code is mounted directly into the container, so any changes you make on your machine will be reflected immediately. Your application will need to communicate with the external pricing model, which also runs in its own Docker container.
 
-1.  **Create a new, public repository** on your personal GitHub or GitLab account.
-2.  **Copy the assignment code** into your new repository. You can do this by cloning our repository and pushing it to your new one, or by downloading the code as a ZIP and committing it.
-3.  **Email the link** to your personal repository to the person who sent you the assignment.
+### Quick Start Guide
 
-**Important:** Please **do not fork our repository or open a pull request**. We use pull requests to manage and update the assignments, not to review candidate submissions.
+Here is a list of common commands for building, running, and interacting with the Dockerized environment.
 
-### Can I use an AI assistant or LLM to help with the assignment?
+```bash
 
-Up to you. Our goal is to see how you solve problems in a real-world setting. If LLMs are part of your standard workflow, you are welcome to use them.
+# --- 1. Build & Run The Main Application ---
+# Build the Docker image
+docker build -t interview-app .
 
-However, If you use an AI assistant, please document its usage in your `README.md`, including:
-1.  Which parts of the solution were developed with AI assistance.
-2.  A description of the tools and your workflow.
+# Run the service
+docker run -p 3000:3000 -v $(pwd):/rails interview-app
 
-We are interested in how you leverage modern tools to build great software.
+# --- 2. Test The Endpoint ---
+# Send a sample request to your running service
+curl 'http://localhost:3000/pricing?period=Summer&hotel=FloatingPointResort&room=SingletonRoom'
 
-### What happens after I submit?
+# --- 3. Run Tests ---
+# Run the development container in the background
+docker run -d -p 3000:3000 -v $(pwd):/rails --name interview-dev interview-app
 
-Once you submit, our engineering team will review your solution. We will always provide you with feedback on your submission. If your solution aligns well with the role, we will contact you to schedule a follow-up interview to walk through your code with you.
+# Run the full test suite
+docker container exec -it interview-dev ./bin/rails test
 
-### I have an idea for a feature. Should I build it?
+# Run a specific test file
+docker container exec -it interview-dev ./bin/rails test test/controllers/pricing_controller_test.rb
 
-That's up to you. We intentionally leave the problems open-ended to see how you make product and engineering decisions.
+# Run a specific test by name
+docker container exec -it interview-dev ./bin/rails test test/controllers/pricing_controller_test.rb -n test_should_get_pricing_with_all_parameters
+```
 
-However, the priority should always be a simple, robust, and well-tested solution to the core problem. If a new feature feels like it would take several hours or days to implement, it's likely out of scope and not essential.
 
-### Is it okay to share my solution publicly?
+## Licensing
 
-Yes, absolutely. You put in the time, so you own the code. It's completely reasonable for you to keep your solution and use it as you see fit. The real value for us is in the process and the conversation around your submission.
-
-### The requirements seem ambiguous. What should I do?
-
-That's often intentional\! We want to see how you handle ambiguity and make design choices when the path isn't perfectly clear.
-
-Our preference is that you make a reasonable assumption, document it in your `README`, and move forward. There's no wrong answer in these situations. If you feel completely blocked, don't hesitate to email us, and we'll be happy to provide clarification.
-
-### Why a take-home assignment?
-
-This assignment is a practical way for us to see your problem-solving skills on a realistic challenge. It's also a chance for you to see the kind of work we do and decide if it's a good fit. We use your submission as the starting point for a technical conversation in our follow-up interview.
-
+This project is under a custom evaluation license. See [LICENSE](LICENSE) for full terms. In short: it is not for distribution or commercial use. The repository exists solely to evaluate the capabilities of Samuel Frost for potential business relations. Use of solutions from this repository by Tripla or associates for real business profit without hiring Samuel Frost or obtaining explicit consent may result in liability to share revenue with Samuel Frost.
