@@ -6,16 +6,12 @@ services:
       context: ../
       dockerfile: .devcontainer/Dockerfile.dev
       args:
-        # if your default docker user group is not 1, 999 or 1001, you can set the DOCKER_GID environment variable to set the group id.
-        DOCKER_GID: ${DOCKER_GID:-1}
         DEVELOPER_UID: ${DEVELOPER_UID:-501}
     pull_policy: never
     volumes:
       - ../:/workspaces:cached
       # Reuse host Docker daemon (achieves similar effect to devcontainer feature "docker-outside-of-docker" for Alpine)
       - /var/run/docker.sock:/var/run/docker.sock
-    environment:
-      - DOCKER_GID=$(stat -c '%g' /var/run/docker.sock)
     command: tail -f /dev/null
     # depends_on:
     #   - dynamic-pricing-base

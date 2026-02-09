@@ -7,8 +7,7 @@
 FROM dynamic-pricing-base AS dynamic-pricing-dev
 
 ARG DEVELOPER_UID=501
-
-RUN addgroup -g $DEVELOPER_UID developer \
+RUN addgroup developer \
     && adduser -D -u $DEVELOPER_UID -G developer developer
 
 USER developer:developer

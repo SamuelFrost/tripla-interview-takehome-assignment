@@ -16,7 +16,7 @@ RUN addgroup -g $DOCKER_GID docker || addgroup -g 1 docker  || addgroup -g 999 d
 ARG DEVELOPER_UID=501
 # # note: uid gets updated by devcontainer.json, this is for any file creations that need to be owned by the developer user.
 # # UID may be updated at container start by devcontainer (updateRemoteUserUID)
-RUN addgroup -g $DEVELOPER_UID developer \
+RUN addgroup developer \
     && adduser -D -u $DEVELOPER_UID -G developer developer \
     && adduser developer docker
 
