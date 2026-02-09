@@ -4,11 +4,13 @@ This project is under a custom evaluation license. See [LICENSE](LICENSE) for fu
 
 # Tripla interview takehome assignment
 
-This is a Ruby on Rails application that uses PostgreSQL as the database.
+This is a project that uses a Ruby on Rails application for core processes. SQLite is being used as the database.
 
 ## Getting Started
 
 To get started with this project, you'll need to have a linux kernal OS and Docker installed on your machine. Windows users should use WSL2 (windows subsystem for linux). Mac and linux users should not need special steps beyond installing docker.
+
+This project uses devcontainers to minimize local setup requirements. For the best experience use devcontainers for development dependencies (most modern IDEs support devcontainers out of the box, for vscode and cursor users, you can run the "Dev Containers: Rebuild and Reopen in Container" command). Otherwise you can install the CLI if desired, or install the appropriate ruby version and other software for this project.
 
 ### Setup
 
@@ -23,6 +25,8 @@ The provided `Dockerfile` builds a container with all necessary dependencies. Yo
 ### Quick Start Guide
 
 Here is a list of common commands for building, running, and interacting with the Dockerized environment.
+
+#### dyanmic-pricing rails application
 
 ```bash
 

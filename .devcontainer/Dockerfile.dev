@@ -1,0 +1,15 @@
+# Note:
+# This does not require using the rails application as the base image.
+# The decision to use the rails application as the base image is based on the assumption that the rails application will be the main focus of the project.
+# If this changes, the base image should be changed to the most frequently updated image.
+# It is also reasonable to use a standalone image if development requirements diverge significantly.
+FROM dynamic-pricing:latest AS dynamic-pricing-dev
+
+# Add development dependencies as needed
+
+# Install bash, Docker CLI, and GitHub CLI (git is already in the base image)
+RUN apk add --no-cache bash \
+    && (grep -q community /etc/apk/repositories || echo "https://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d. -f1,2)/community" >> /etc/apk/repositories) \
+    && apk update && apk add --no-cache docker-cli docker-cli-compose github-cli
+
+CMD ["tail", "-f", "/dev/null"]

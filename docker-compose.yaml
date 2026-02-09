@@ -1,0 +1,27 @@
+name: "Tripla Interview Takehome Assignment"
+services:
+
+  dynamic-pricing:
+    image: dynamic-pricing
+    build:
+      context: ./dynamic-pricing/
+      dockerfile: Dockerfile
+    working_dir: /workspaces/dynamic-pricing
+    environment:
+      # RAILS_LOG_TO_STDOUT: true
+      PORT: 3000
+      RAILS_ENV: "development"
+      BUNDLE_PATH: "/usr/local/bundle"
+      BUNDLE_WITHOUT: ""
+    volumes:
+    # note: LOCAL_WORKSPACE_FOLDER is set by the devcontainer.json to point to the local folder on the host machine
+      - ${LOCAL_WORKSPACE_FOLDER:-.}/dynamic-pricing:/workspaces/dynamic-pricing:cached
+    ports:
+      - "3000:3000"
+      # Run interruptible interactive terminals like debug or binding.break and such with the following command
+      # docker compose down dynamic-pricing && docker compose run -p 3000:3000 --rm dynamic-pricing
+
+networks:
+  default:
+    external: false
+    name: tripla-interview-takehome-assignment

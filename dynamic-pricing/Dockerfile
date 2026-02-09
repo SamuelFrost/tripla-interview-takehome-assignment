@@ -5,7 +5,7 @@ ARG RUBY_VERSION=3.2.6
 FROM ruby:$RUBY_VERSION-alpine
 
 # Rails app lives here
-WORKDIR /rails
+WORKDIR /workspaces/dynamic-pricing
 
 # Set development environment
 ENV RAILS_ENV="development" \
@@ -23,8 +23,8 @@ RUN apk add --no-cache \
     tzdata
 
 # Install application gems
-COPY Gemfile Gemfile.lock /rails/
-RUN bundle install --gemfile=/rails/Gemfile
+COPY Gemfile Gemfile.lock /workspaces/dynamic-pricing/
+RUN bundle install --gemfile=/workspaces/dynamic-pricing/Gemfile
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
