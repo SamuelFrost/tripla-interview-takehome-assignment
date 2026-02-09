@@ -42,7 +42,8 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "Shopify.ruby-lsp"
+        "Shopify.ruby-lsp",
+        "ms-azuretools.vscode-docker"
       ]
     }
   }
