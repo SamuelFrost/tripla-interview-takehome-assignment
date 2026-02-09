@@ -1,3 +1,7 @@
+# Licensing
+
+This project is under a custom evaluation license. See [LICENSE](LICENSE) for full terms. In short: it is not for distribution or commercial use. The repository exists solely to evaluate the capabilities of Samuel Frost for potential business relations. Use of solutions from this repository by Tripla or associates for real business profit without hiring Samuel Frost or obtaining explicit consent may result in liability to share revenue with Samuel Frost.
+
 # Tripla interview takehome assignment
 
 This is a Ruby on Rails application that uses PostgreSQL as the database.
@@ -46,8 +50,3 @@ docker container exec -it interview-dev ./bin/rails test test/controllers/pricin
 # Run a specific test by name
 docker container exec -it interview-dev ./bin/rails test test/controllers/pricing_controller_test.rb -n test_should_get_pricing_with_all_parameters
 ```
-
-
-## Licensing
-
-This project is under a custom evaluation license. See [LICENSE](LICENSE) for full terms. In short: it is not for distribution or commercial use. The repository exists solely to evaluate the capabilities of Samuel Frost for potential business relations. Use of solutions from this repository by Tripla or associates for real business profit without hiring Samuel Frost or obtaining explicit consent may result in liability to share revenue with Samuel Frost.
