@@ -8,11 +8,10 @@ FROM dynamic-pricing-base AS devcontainer
 
 # Install bash, Docker CLI, GitHub CLI, OpenSSH (git is in base image; ssh needed for git authentication) docker compose
 RUN apk update && \
-    apk add --no-cache bash openssh-client git curl docker-cli docker-compose github-cli
+    apk add --no-cache bash openssh-client curl docker-cli docker-compose github-cli
 
-ARG DOCKER_GID=1
-# If your docker group is not one of the common defaults: 1, 999 or 1001, you should set DOCKER_GID
-RUN addgroup -g $DOCKER_GID docker || addgroup -g 1 docker  || addgroup -g 999 docker || addgroup -g 1001 docker
+RUN addgroup -g 1001 docker || addgroup docker
+
 ARG DEVELOPER_UID=501
 # # note: uid gets updated by devcontainer.json, this is for any file creations that need to be owned by the developer user.
 # # UID may be updated at container start by devcontainer (updateRemoteUserUID)
