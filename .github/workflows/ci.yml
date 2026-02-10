@@ -17,7 +17,7 @@ jobs:
     - name: Build Docker image
       run: docker build -t interview-app .
     - name: Run the container
-      run: docker run -d -p 3000:3000 -v $(pwd):/rails --name interview-dev interview-app
+      run: docker run -d -p 3000:3000 -v $(pwd):/workspaces/dynamic-pricing --name interview-dev interview-app
     - name: Run all tests
       run: docker container exec interview-dev ./bin/rails test
     - name: Test API endpoint returns 200

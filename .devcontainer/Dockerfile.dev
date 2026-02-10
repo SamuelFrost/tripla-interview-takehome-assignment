@@ -1,0 +1,24 @@
+# Note:
+# This does not require using the rails application as the base image.
+# The decision to use the rails application as the base image is based on the assumption that the rails application will be the main focus of the project.
+# It is also reasonable to use a standalone image if development requirements diverge significantly.
+FROM dynamic-pricing-base AS devcontainer
+
+# Add development dependencies as needed
+
+# Install bash, Docker CLI, GitHub CLI, OpenSSH (git is in base image; ssh needed for git authentication) docker compose
+RUN apk update && \
+    apk add --no-cache bash openssh-client curl docker-cli docker-compose github-cli
+
+RUN addgroup -g 1001 docker || addgroup docker
+
+ARG DEVELOPER_UID=501
+# # note: uid gets updated by devcontainer.json, this is for any file creations that need to be owned by the developer user.
+# # UID may be updated at container start by devcontainer (updateRemoteUserUID)
+RUN addgroup developer \
+    && adduser -D -u $DEVELOPER_UID -G developer developer \
+    && adduser developer docker
+
+USER developer:developer
+
+CMD ["tail", "-f", "/dev/null"]

@@ -4,17 +4,61 @@ This project is under a custom evaluation license. See [LICENSE](LICENSE) for fu
 
 # Tripla interview takehome assignment
 
-This is a Ruby on Rails application that uses PostgreSQL as the database.
+This is a project that uses a Ruby on Rails application for core processes. SQLite is being used as the database.
 
 ## Getting Started
 
 To get started with this project, you'll need to have a linux kernal OS and Docker installed on your machine. Windows users should use WSL2 (windows subsystem for linux). Mac and linux users should not need special steps beyond installing docker.
 
-### Setup
+This project uses devcontainers to minimize local setup requirements. For the best experience use devcontainers for development dependencies (most modern IDEs support devcontainers out of the box, for vscode and cursor users, you can run the "Dev Containers: Rebuild and Reopen in Container" command). Otherwise you can install the CLI if desired, or install the appropriate ruby version and other software for this project.
 
-TODO: refine this to be more in line with a fully functioning project as opposed to a simple stand alone container
+## Setup
 
-## Development Environment Setup
+### Development Environment Setup
+
+
+#### 1. Clone the repository
+
+In your projects directory run the following:
+
+```console
+   git clone https://github.com/SamuelFrost/tripla-interview-takehome-assignment.git
+   cd tripla-interview-takehome-assignment
+```
+
+All commands are run from the top level cloned project directory unless otherwise mentioned.
+
+#### 2. Optional use devcontainer (recommended and considered the default context for running commands)
+
+You can use a remote devcontainer environment that will make it easy to keep your locally installed software in line with other developers. This is particularly useful if you are using vscode or a devcontainer compatible IDE that can be mounted onto the devcontainer.
+
+##### using vscode or cursor
+
+- ensure you have a dev containers extension installed (ms-vscode-remote.remote-containers, or anysphere.remote-containers)
+- open the project folder in vscode
+- WSL users: if you are using windows subsystem for linux, enable the vscode setting `"dev.containers.executeInWSL": true`, without this, ssh credentials will not be shared with the devcontainer and you won't be able to use your git account from the cli easily
+- use dev containers commands through the IDE to build and open the project
+  - use the quick action bar (ctrl + p / cmd + p) to search for `Dev Containers: Rebuild and Reopen in Container` (command id is "remote-containers.rebuildAndReopenInContainer")
+- vs code should reopen on top of the remote environment
+
+#### 3. Start services
+
+Start services using docker compose.
+
+```console
+docker compose up --build
+```
+
+##### common troubleshooting
+
+If you are not using a devcontainer and there are oddities around file ownership you may need to add your userid before building with docker. Run `sh -c '(echo \"DEVELOPER_UID=$(id -u)\nDEVELOPER_GID=$(id -g)\") > .env` once before running docker compose up --build.
+
+If you are not using a devcontainer you will need to create the base image manually.
+```console
+docker build -t dynamic-pricing-base ./dynamic-pricing/
+```
+
+### Project Information
 
 The project scaffold is a minimal Ruby on Rails application with a `/pricing` endpoint. While you're free to configure your environment as you wish, this repository is pre-configured for a Docker-based workflow that supports live reloading for your convenience.
 
@@ -23,6 +67,8 @@ The provided `Dockerfile` builds a container with all necessary dependencies. Yo
 ### Quick Start Guide
 
 Here is a list of common commands for building, running, and interacting with the Dockerized environment.
+
+#### dyanmic-pricing rails application
 
 ```bash
 
