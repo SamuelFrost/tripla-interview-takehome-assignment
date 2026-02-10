@@ -30,7 +30,7 @@ You can use a remote devcontainer environment that will make it easy to keep you
 
 ##### using vscode or cursor
 
-- ensure you have dev containers extension installed
+- ensure you have a dev containers extension installed (ms-vscode-remote.remote-containers, or anysphere.remote-containers)
 - open the project folder in vscode
 - WSL users: if you are using windows subsystem for linux, enable the vscode setting `"dev.containers.executeInWSL": true`, without this, ssh credentials will not be shared with the devcontainer and you won't be able to use your git account from the cli easily
 - use dev containers commands through the IDE to build and open the project
