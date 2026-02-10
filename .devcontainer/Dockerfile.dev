@@ -10,7 +10,8 @@ FROM dynamic-pricing-base AS devcontainer
 RUN apk update && \
     apk add --no-cache bash openssh-client curl docker-cli docker-compose github-cli
 
-RUN addgroup -g 1001 docker || addgroup docker
+ARG DOCKER_GID=1
+RUN addgroup -g $DOCKER_GID docker || addgroup -g 1001 docker || addgroup docker
 
 ARG DEVELOPER_UID=501
 # # note: uid gets updated by devcontainer.json, this is for any file creations that need to be owned by the developer user.
@@ -19,7 +20,8 @@ RUN addgroup developer \
     && adduser -D -u $DEVELOPER_UID -G developer developer \
     && adduser developer docker
 
-RUN chown -R developer:developer ~
+# change ownership of files that may need to be modified or executed by the developer user
+RUN chown -R developer:developer /usr/local/bundle /home/developer/
 
 USER developer:developer
 
