@@ -19,10 +19,10 @@ This project uses devcontainers to minimize local setup requirements. For the be
 
 #### 1. Clone the repository
 
-   ```console
-   git clone https://github.com/SamuelFrost/calendaculator.git
-   cd calendaculator
-   ```
+```console
+   git clone https://github.com/SamuelFrost/tripla-interview-takehome-assignment.git
+   cd tripla-interview-takehome-assignment
+```
 
 #### 2. Optional use devcontainer (recommended and considered the default context for running commands)
 
