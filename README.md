@@ -19,10 +19,14 @@ This project uses devcontainers to minimize local setup requirements. For the be
 
 #### 1. Clone the repository
 
+In your projects directory run the following:
+
 ```console
    git clone https://github.com/SamuelFrost/tripla-interview-takehome-assignment.git
    cd tripla-interview-takehome-assignment
 ```
+
+All commands are run from the top level cloned project directory unless otherwise mentioned.
 
 #### 2. Optional use devcontainer (recommended and considered the default context for running commands)
 
@@ -36,6 +40,14 @@ You can use a remote devcontainer environment that will make it easy to keep you
 - use dev containers commands through the IDE to build and open the project
   - use the quick action bar (ctrl + p / cmd + p) to search for `Dev Containers: Rebuild and Reopen in Container` (command id is "remote-containers.rebuildAndReopenInContainer")
 - vs code should reopen on top of the remote environment
+
+#### 3. Start services
+
+Start services using docker compose. If you are not using a devcontainer and there are oddities around file ownership you may need to run `export DEVELOPER_UID=$(id -u)` before running docker compose up. 
+
+```console
+docker compose up --build
+```
 
 ### Project Information
 
