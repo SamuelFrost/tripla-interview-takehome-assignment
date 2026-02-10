@@ -13,4 +13,4 @@ RUN addgroup developer \
 USER developer:developer
 
 EXPOSE 3000
-CMD ["sh", "-c", "./bin/rails db:prepare && ./bin/rails server -b 0.0.0.0"]
+CMD ["sh", "-c", "rm -f /workspaces/dynamic-pricing/tmp/pids/server.pid && ./bin/rails db:prepare && ./bin/rails server -b 0.0.0.0"]
