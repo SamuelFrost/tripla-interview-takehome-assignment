@@ -14,7 +14,7 @@
   "updateRemoteUserUID": true,
 
   // ensures the base image is built and tagged as dynamic-pricing-base before the development container is started
-  "initializeCommand": "export DEVELOPER_UID=$(id -u) && export DEVELOPER_GID=$(id -g) && docker build -t dynamic-pricing-base ./dynamic-pricing/",
+  "initializeCommand": "sh -c '(echo \"DEVELOPER_UID=$(id -u)\nDEVELOPER_GID=$(id -g)\") > .env' && docker build -t dynamic-pricing-base ./dynamic-pricing/",
 
   // Important for docker-outside-of-docker feature to work with project docker compose
   "remoteEnv": { "LOCAL_WORKSPACE_FOLDER": "${localWorkspaceFolder}" },
@@ -37,8 +37,6 @@
     "onAutoForward": "ignore"
   },
 
-  // Persist DEVELOPER_UID in .env so "docker compose" (e.g. for dynamic-pricing) builds/run with host UID and can write log/tmp.
-  "postStartCommand": "sh -c '(echo \"DEVELOPER_UID=$(id -u)\nDEVELOPER_GID=$(id -g)\") > .env'",
   "customizations": {
     "vscode": {
       "extensions": [

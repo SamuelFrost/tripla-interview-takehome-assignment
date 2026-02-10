@@ -43,10 +43,19 @@ You can use a remote devcontainer environment that will make it easy to keep you
 
 #### 3. Start services
 
-Start services using docker compose. If you are not using a devcontainer and there are oddities around file ownership you may need to run `export DEVELOPER_UID=$(id -u)` before running docker compose up. 
+Start services using docker compose.
 
 ```console
 docker compose up --build
+```
+
+##### common troubleshooting
+
+If you are not using a devcontainer and there are oddities around file ownership you may need to add your userid before building with docker. Run `sh -c '(echo \"DEVELOPER_UID=$(id -u)\nDEVELOPER_GID=$(id -g)\") > .env` once before running docker compose up --build.
+
+If you are not using a devcontainer you will need to create the base image manually.
+```console
+docker build -t dynamic-pricing-base ./dynamic-pricing/
 ```
 
 ### Project Information
