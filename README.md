@@ -12,11 +12,32 @@ To get started with this project, you'll need to have a linux kernal OS and Dock
 
 This project uses devcontainers to minimize local setup requirements. For the best experience use devcontainers for development dependencies (most modern IDEs support devcontainers out of the box, for vscode and cursor users, you can run the "Dev Containers: Rebuild and Reopen in Container" command). Otherwise you can install the CLI if desired, or install the appropriate ruby version and other software for this project.
 
-### Setup
+## Setup
 
-TODO: refine this to be more in line with a fully functioning project as opposed to a simple stand alone container
+### Development Environment Setup
 
-## Development Environment Setup
+
+#### 1. Clone the repository
+
+   ```console
+   git clone https://github.com/SamuelFrost/calendaculator.git
+   cd calendaculator
+   ```
+
+#### 2. Optional use devcontainer (recommended and considered the default context for running commands)
+
+You can use a remote devcontainer environment that will make it easy to keep your locally installed software in line with other developers. This is particularly useful if you are using vscode or a devcontainer compatible IDE that can be mounted onto the devcontainer.
+
+##### using vscode or cursor
+
+- ensure you have dev containers extension installed
+- open the project folder in vscode
+- WSL users: if you are using windows subsystem for linux, enable the vscode setting `"dev.containers.executeInWSL": true`, without this, ssh credentials will not be shared with the devcontainer and you won't be able to use your git account from the cli easily
+- use dev containers commands through the IDE to build and open the project
+  - use the quick action bar (ctrl + p / cmd + p) to search for `Dev Containers: Rebuild and Reopen in Container` (command id is "remote-containers.rebuildAndReopenInContainer")
+- vs code should reopen on top of the remote environment
+
+### Project Information
 
 The project scaffold is a minimal Ruby on Rails application with a `/pricing` endpoint. While you're free to configure your environment as you wish, this repository is pre-configured for a Docker-based workflow that supports live reloading for your convenience.
 
