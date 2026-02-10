@@ -10,6 +10,8 @@ ARG DEVELOPER_UID=501
 RUN addgroup developer \
     && adduser -D -u $DEVELOPER_UID -G developer developer
 
+RUN chown -R developer:developer ~
+
 USER developer:developer
 
 EXPOSE 3000

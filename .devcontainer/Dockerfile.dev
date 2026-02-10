@@ -19,6 +19,8 @@ RUN addgroup developer \
     && adduser -D -u $DEVELOPER_UID -G developer developer \
     && adduser developer docker
 
+RUN chown -R developer:developer ~
+
 USER developer:developer
 
 CMD ["tail", "-f", "/dev/null"]
