@@ -66,8 +66,43 @@ The provided `Dockerfile` builds a container with all necessary dependencies. Yo
 
 ### Quick Start Guide
 
+#### dynamic-pricing rails application
+
+Run commands prefixed with `docker compose exec dynamic-pricing` as if you were running them locally, ruby based commands should be prefixed with `bundle exec`. 
+
 Here is a list of common commands for building, running, and interacting with the Dockerized environment.
 
+running tests; add `-v` option for verbose; add test filepath (relative from dynamic-pricing directory) for more focused testing 
+```console
+docker compose exec dynamic-pricing bundle exec rails test
+```
+
+#### Background Jobs with Solid Queue
+
+The application uses Solid Queue for background job processing. A recurring job updates hotel room prices every 4.5 minutes.
+
+To start the Solid Queue worker:
+
+```console
+docker compose exec dynamic-pricing bundle exec rails solid_queue:start
+```
+
+Alternatively, you can use the jobs script:
+
+```console
+docker compose exec dynamic-pricing bin/jobs
+```
+
+To manually trigger a price update job:
+
+```console
+docker compose exec dynamic-pricing bundle exec rails runner "UpdateHotelRoomPricesJob.perform_now"
+```
+
+The recurring job configuration is in `config/recurring.yml`. Jobs are stored in a separate SQLite database for the queue.
+
+
+<!-- The following is an older way of interacting with the dockerized environment, some of it still works, but it will be removed and replaced soon -->
 #### dyanmic-pricing rails application
 
 ```bash
