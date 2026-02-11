@@ -1,12 +1,8 @@
 class PricingController < ApplicationController
-  VALID_PERIODS = %w[Summer Autumn Winter Spring].freeze
-  VALID_HOTELS = %w[FloatingPointResort GitawayHotel RecursionRetreat].freeze
-  VALID_ROOMS = %w[SingletonRoom BooleanTwin RestfulKing].freeze
-
   before_action :validate_params
 
   def index
-    rate = HotelRoomPrice.find_by(period: params[:period], hotel: params[:hotel], room: params[:room]).rate
+    rate = HotelRoomPrice.find_by!(period: params[:period], hotel: params[:hotel], room: params[:room]).rate
 
     # ISSUE: using a single rate returned for index does not follow restful api naming conventions, consider renaming to show
     render json: { rate: }
@@ -21,16 +17,16 @@ class PricingController < ApplicationController
     end
 
     # Validate parameter values
-    unless VALID_PERIODS.include?(params[:period])
-      return render json: { error: "Invalid period. Must be one of: #{VALID_PERIODS.join(', ')}" }, status: :bad_request
+    unless RateApi::VALID_PERIODS.include?(params[:period])
+      return render json: { error: "Invalid period. Must be one of: #{RateApi::VALID_PERIODS.join(', ')}" }, status: :bad_request
     end
 
-    unless VALID_HOTELS.include?(params[:hotel])
-      return render json: { error: "Invalid hotel. Must be one of: #{VALID_HOTELS.join(', ')}" }, status: :bad_request
+    unless RateApi::VALID_HOTELS.include?(params[:hotel])
+      return render json: { error: "Invalid hotel. Must be one of: #{RateApi::VALID_HOTELS.join(', ')}" }, status: :bad_request
     end
 
-    unless VALID_ROOMS.include?(params[:room])
-      return render json: { error: "Invalid room. Must be one of: #{VALID_ROOMS.join(', ')}" }, status: :bad_request
+    unless RateApi::VALID_ROOMS.include?(params[:room])
+      return render json: { error: "Invalid room. Must be one of: #{RateApi::VALID_ROOMS.join(', ')}" }, status: :bad_request
     end
   end
 end
