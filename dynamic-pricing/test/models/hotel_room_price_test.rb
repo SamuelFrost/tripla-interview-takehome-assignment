@@ -1,0 +1,27 @@
+require "test_helper"
+
+class HotelRoomPriceTest < ActiveSupport::TestCase
+  TOTAL_SEASONAL_HOTEL_ROOM_COUNT=RateApi::VALID_PERIODS.count * RateApi::VALID_HOTELS.count * RateApi::VALID_ROOMS.count
+
+  test "update_prices fetches rates and inserts them" do
+
+    VCR.use_cassette("rate_api/get_pricing_all_attributes_success") do
+      HotelRoomPrice.update_prices
+      assert_equal TOTAL_SEASONAL_HOTEL_ROOM_COUNT, HotelRoomPrice.count
+      # check a single sample of the rates
+      assert_equal "51600", HotelRoomPrice.find_by(period: "Summer", hotel: "FloatingPointResort", room: "SingletonRoom").rate
+    end
+  end
+
+  test "update_prices does not insert duplicate rates and instead overwrites them" do
+    VCR.use_cassette("rate_api/get_pricing_all_attributes_success") do
+      HotelRoomPrice.update_prices
+      assert_equal TOTAL_SEASONAL_HOTEL_ROOM_COUNT, HotelRoomPrice.count
+    end
+
+    VCR.use_cassette("rate_api/get_pricing_all_attributes_success_with_different_rates") do
+      HotelRoomPrice.update_prices
+      assert_equal TOTAL_SEASONAL_HOTEL_ROOM_COUNT, HotelRoomPrice.count
+    end
+  end
+end

@@ -2,17 +2,21 @@ require "test_helper"
 
 class PricingControllerTest < ActionDispatch::IntegrationTest
   test "should get pricing with all parameters" do
-    get pricing_url, params: {
+    parameters = {
       period: "Summer",
       hotel: "FloatingPointResort",
       room: "SingletonRoom"
     }
 
+    hotel_room_price = FactoryBot.create(:hotel_room_price, parameters.merge({rate: "12000"}))
+
+    get pricing_url, params: parameters
+
     assert_response :success
     assert_equal "application/json", @response.media_type
 
     json_response = JSON.parse(@response.body)
-    assert_equal "12000", json_response["rate"]
+    assert_equal hotel_room_price.rate, json_response["rate"]
   end
 
   test "should return error without any parameters" do

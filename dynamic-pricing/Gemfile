@@ -27,6 +27,12 @@ gem "webmock", "~> 3.20"
 # Use Faraday to make HTTP requests
 gem "faraday", "~> 2.14"
 
+# Use FactoryBot to generate test data
+gem "factory_bot_rails", "~> 6.4"
+
+# Use Faker to generate realistic test data
+gem "faker", "~> 3.6"
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
