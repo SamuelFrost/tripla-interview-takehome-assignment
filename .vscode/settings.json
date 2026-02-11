@@ -10,5 +10,13 @@
     "ms-azuretools.vscode-containers",
     "shopify.ruby-lsp",
     // "marcoroth.stimulus-lsp", // recommended if this project ends up using html.erb
-  ]
+  ],
+  "terminal.integrated.profiles.linux": {
+    "sh-custom": {
+      "path": "sh",
+      "icon": "terminal",
+      "color": "terminal.ansiGreen"
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "sh-custom",
 }
