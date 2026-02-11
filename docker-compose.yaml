@@ -15,6 +15,8 @@ services:
       RAILS_ENV: "development"
       BUNDLE_PATH: "/usr/local/bundle"
       BUNDLE_WITHOUT: ""
+      RATE_API_URL: http://rate-api:8080
+      RATE_API_KEY: 04aa6f42aa03f220c2ae9a276cd68c62
     volumes:
     # note: LOCAL_WORKSPACE_FOLDER is set by the devcontainer.json to point to the local folder on the host machine
       - ${LOCAL_WORKSPACE_FOLDER:-.}/dynamic-pricing:/workspaces/dynamic-pricing:cached
@@ -22,6 +24,12 @@ services:
       - "3000:3000"
       # Run interruptible interactive terminals like debug or binding.break and such with the following command
       # docker compose down dynamic-pricing && docker compose run -p 3000:3000 --rm dynamic-pricing
+  rate-api:
+    image: tripladev/rate-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./rate-api/data:/app/data
 
 networks:
   default:
