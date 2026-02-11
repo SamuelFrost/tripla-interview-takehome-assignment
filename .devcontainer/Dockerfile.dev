@@ -20,8 +20,9 @@ RUN addgroup developer \
     && adduser -D -u $DEVELOPER_UID -G developer developer \
     && adduser developer docker
 
-# change ownership of files that may need to be modified or executed by the developer user
-RUN chown -R developer:developer /usr/local/bundle /home/developer/
+# Ensure developer user has write permissions to /usr/local/bundle and /home/developer to avoid Bundler Permission Error
+RUN chown -R developer:developer /usr/local/bundle /home/developer/ && \
+    chmod -R u+w /usr/local/bundle /home/developer
 
 USER developer:developer
 

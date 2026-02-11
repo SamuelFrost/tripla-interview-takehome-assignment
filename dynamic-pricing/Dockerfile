@@ -24,7 +24,7 @@ RUN apk add --no-cache \
 
 # Install application gems
 COPY Gemfile Gemfile.lock /workspaces/dynamic-pricing/
-RUN bundle install --gemfile=/workspaces/dynamic-pricing/Gemfile
+RUN bundle install --gemfile=/workspaces/dynamic-pricing/Gemfile --jobs=4 --retry=3
 
 # Start the server by default, this can be overwritten at runtime
 EXPOSE 3000
