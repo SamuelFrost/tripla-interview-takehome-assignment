@@ -10,7 +10,7 @@ http_interactions:
       Content-Type:
       - application/json
       Token:
-      - 04aa6f42aa03f220c2ae9a276cd68c62
+      - "<RATE_API_KEY>"
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -25,7 +25,7 @@ http_interactions:
       Server:
       - Werkzeug/3.1.3 Python/3.12.12
       Date:
-      - Wed, 11 Feb 2026 05:28:27 GMT
+      - Wed, 11 Feb 2026 06:57:35 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -40,16 +40,16 @@ http_interactions:
             {
               "hotel": "FloatingPointResort",
               "period": "Summer",
-              "rate": 51100,
+              "rate": 37900,
               "room": "SingletonRoom"
             },
             {
               "hotel": "FloatingPointResort",
               "period": "Spring",
-              "rate": 63800,
+              "rate": 61100,
               "room": "SingletonRoom"
             }
           ]
         }
-  recorded_at: Wed, 11 Feb 2026 05:28:27 GMT
+  recorded_at: Wed, 11 Feb 2026 06:57:35 GMT
 recorded_with: VCR 6.4.0

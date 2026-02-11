@@ -5,7 +5,7 @@ class RateApiTest < ActiveSupport::TestCase
   test "returns rate for a single attribute combination" do
     VCR.use_cassette("rate_api/get_pricing_success") do
       response = RateApi.new.get_pricing(attributes: [{ period: "Summer", hotel: "FloatingPointResort", room: "SingletonRoom" }])
-      assert_equal response, [{ "period" => "Summer", "hotel" => "FloatingPointResort", "room" => "SingletonRoom", "rate" => 51100 }]
+      assert_equal response, [{ "hotel" => "FloatingPointResort", "period" => "Summer", "rate" => 19100, "room" => "SingletonRoom" }]
     end
   end
 
@@ -15,8 +15,8 @@ class RateApiTest < ActiveSupport::TestCase
       { period: "Spring", hotel: "FloatingPointResort", room: "SingletonRoom" },
     ]
     response_attributes = [
-      { "period" => "Summer", "hotel" => "FloatingPointResort", "room" => "SingletonRoom", "rate" => 51100 },
-      { "period" => "Spring", "hotel" => "FloatingPointResort", "room" => "SingletonRoom", "rate" => 63800 },
+      { "hotel" => "FloatingPointResort", "period" => "Summer", "rate" => 37900, "room" => "SingletonRoom" },
+      { "hotel" => "FloatingPointResort", "period" => "Spring", "rate" => 61100, "room" => "SingletonRoom" },
     ]
 
     VCR.use_cassette("rate_api/get_pricing_multiple_attributes_success") do
