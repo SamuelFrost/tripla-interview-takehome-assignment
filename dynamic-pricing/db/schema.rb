@@ -15,11 +15,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_02_10_152754) do
     t.datetime "created_at", null: false
     t.string "hotel", null: false
     t.string "period", null: false
-    t.decimal "rate", precision: 12, scale: 2
+    t.string "rate"
     t.string "room", null: false
     t.datetime "updated_at", null: false
-    t.datetime "valid_to", null: false
     t.index ["period", "room", "hotel"], name: "index_hotel_room_prices_on_period_room_hotel_unique", unique: true
-    t.index ["valid_to"], name: "index_hotel_room_prices_on_valid_to"
   end
 end

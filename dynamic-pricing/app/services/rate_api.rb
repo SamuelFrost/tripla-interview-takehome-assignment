@@ -1,4 +1,10 @@
 class RateApi
+  # TODO: use a realistic way to obtain hotels, rooms and periods from a database or API (remove logic relying on hardcoded values)
+  VALID_PERIODS = %w[Summer Autumn Winter Spring].freeze
+  VALID_HOTELS = %w[FloatingPointResort GitawayHotel RecursionRetreat].freeze
+  VALID_ROOMS = %w[SingletonRoom BooleanTwin RestfulKing].freeze
+
+
   def initialize()
     @url = ENV['RATE_API_URL'] || 'http://localhost:8080'
     @key = ENV['RATE_API_KEY'] || '04aa6f42aa03f220c2ae9a276cd68c62'
