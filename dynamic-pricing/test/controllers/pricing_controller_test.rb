@@ -8,7 +8,7 @@ class PricingControllerTest < ActionDispatch::IntegrationTest
       room: "SingletonRoom"
     }
 
-    hotel_room_price = FactoryBot.create(:hotel_room_price, parameters.merge({rate: "12000"}))
+    hotel_room_price = create(:hotel_room_price, parameters.merge({rate: "12000"}))
 
     get pricing_url, params: parameters
 
