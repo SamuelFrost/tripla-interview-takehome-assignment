@@ -6,12 +6,10 @@ class PricingController < ApplicationController
   before_action :validate_params
 
   def index
-    period = params[:period]
-    hotel  = params[:hotel]
-    room   = params[:room]
+    rate = HotelRoomPrice.find_by(period: params[:period], hotel: params[:hotel], room: params[:room]).rate
 
-    # TODO: Start to implement here
-    render json: { rate: "12000" }
+    # ISSUE: using a single rate returned for index does not follow restful api naming conventions, consider renaming to show
+    render json: { rate: }
   end
 
   private
