@@ -17,11 +17,13 @@ class HotelRoomPriceTest < ActiveSupport::TestCase
     VCR.use_cassette("rate_api/get_pricing_all_attributes_success") do
       HotelRoomPrice.update_prices
       assert_equal TOTAL_SEASONAL_HOTEL_ROOM_COUNT, HotelRoomPrice.count
+      assert_equal "51600", HotelRoomPrice.find_by(period: "Summer", hotel: "FloatingPointResort", room: "SingletonRoom").rate
     end
 
     VCR.use_cassette("rate_api/get_pricing_all_attributes_success_with_different_rates") do
       HotelRoomPrice.update_prices
       assert_equal TOTAL_SEASONAL_HOTEL_ROOM_COUNT, HotelRoomPrice.count
+      assert_equal "62700", HotelRoomPrice.find_by(period: "Summer", hotel: "FloatingPointResort", room: "SingletonRoom").rate
     end
   end
 end

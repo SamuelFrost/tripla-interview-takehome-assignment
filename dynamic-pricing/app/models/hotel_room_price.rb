@@ -17,7 +17,8 @@ class HotelRoomPrice < ApplicationRecord
       end
 
     attributes_with_rates = RateApi.new.get_pricing(attributes:)
-    HotelRoomPrice.insert_all(attributes_with_rates)
+    # update existing rates and insert new ones
+    HotelRoomPrice.upsert_all(attributes_with_rates, unique_by: [:period, :room, :hotel], update_only: [:rate])
   end
 
 end
