@@ -41,7 +41,7 @@ services:
       RATE_API_KEY: 04aa6f42aa03f220c2ae9a276cd68c62
     volumes:
       - ${LOCAL_WORKSPACE_FOLDER:-.}/dynamic-pricing:/workspaces/dynamic-pricing:cached
-    command: ["sh", "-c", "./bin/rails db:prepare && ./bin/jobs"]
+    command: ["sh", "-c", "./bin/rails db:prepare && ./bin/rails runner 'UpdateHotelRoomPricesJob.perform_later' && ./bin/jobs"]
     depends_on:
       - rate-api
   rate-api:
