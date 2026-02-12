@@ -24,6 +24,26 @@ services:
       - "3000:3000"
       # Run interruptible interactive terminals like debug or binding.break and such with the following command
       # docker compose down dynamic-pricing && docker compose run -p 3000:3000 --rm dynamic-pricing
+  dynamic-pricing-worker:
+    image: dynamic-pricing-dev
+    build:
+      context: ./dynamic-pricing/
+      dockerfile: Dockerfile.dev
+      args:
+        DEVELOPER_UID: ${DEVELOPER_UID:-501}
+    pull_policy: never
+    working_dir: /workspaces/dynamic-pricing
+    environment:
+      RAILS_ENV: "development"
+      BUNDLE_PATH: "/usr/local/bundle"
+      BUNDLE_WITHOUT: ""
+      RATE_API_URL: http://rate-api:8080
+      RATE_API_KEY: 04aa6f42aa03f220c2ae9a276cd68c62
+    volumes:
+      - ${LOCAL_WORKSPACE_FOLDER:-.}/dynamic-pricing:/workspaces/dynamic-pricing:cached
+    command: ["sh", "-c", "./bin/rails db:prepare && ./bin/jobs"]
+    depends_on:
+      - rate-api
   rate-api:
     image: tripladev/rate-api
     ports:

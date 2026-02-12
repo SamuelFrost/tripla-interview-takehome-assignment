@@ -48,6 +48,13 @@ Rails.application.configure do
   # Highlight code that enqueued background job in logs.
   config.active_job.verbose_enqueue_logs = true
 
+  # Use Solid Queue for background jobs
+  config.active_job.queue_adapter = :solid_queue
+  config.solid_queue.connects_to = { database: { writing: :queue } }
+  
+  # Set custom logger for Solid Queue so bin/jobs output is visible
+  # When running via docker compose, this logs to STDOUT for docker logs
+  config.solid_queue.logger = ActiveSupport::Logger.new(STDOUT)
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true
