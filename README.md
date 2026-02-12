@@ -21,7 +21,7 @@ This project uses devcontainers to minimize local setup requirements. For the be
 
 In your projects directory run the following:
 
-```console
+```bash
    git clone https://github.com/SamuelFrost/tripla-interview-takehome-assignment.git
    cd tripla-interview-takehome-assignment
 ```
@@ -45,7 +45,7 @@ You can use a remote devcontainer environment that will make it easy to keep you
 
 Start services using docker compose.
 
-```console
+```bash
 docker compose up --build
 ```
 
@@ -54,7 +54,7 @@ docker compose up --build
 If you are not using a devcontainer and there are oddities around file ownership you may need to add your userid before building with docker. Run `sh -c '(echo \"DEVELOPER_UID=$(id -u)\nDEVELOPER_GID=$(id -g)\") > .env` once before running docker compose up --build.
 
 If you are not using a devcontainer you will need to create the base image manually.
-```console
+```bash
 docker build -t dynamic-pricing-base ./dynamic-pricing/
 ```
 
@@ -73,7 +73,7 @@ Run commands prefixed with `docker compose exec dynamic-pricing` as if you were 
 Here is a list of common commands for building, running, and interacting with the Dockerized environment.
 
 running tests; add `-v` option for verbose; add test filepath (relative from dynamic-pricing directory) for more focused testing 
-```console
+```bash
 docker compose exec dynamic-pricing bundle exec rails test
 ```
 
@@ -85,19 +85,19 @@ The application uses Solid Queue for background job processing.
 
 To view worker logs:
 
-```console
+```bash
 docker compose logs -f dynamic-pricing-worker
 ```
 
 To manually trigger a price update job:
 
-```console
+```bash
 docker compose exec dynamic-pricing bundle exec rails runner "UpdateHotelRoomPricesJob.perform_now"
 ```
 
 To restart just the worker:
 
-```console
+```bash
 docker compose restart dynamic-pricing-worker
 ```
 
