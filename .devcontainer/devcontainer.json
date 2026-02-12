@@ -14,7 +14,6 @@
   "updateRemoteUserUID": true,
 
   // ensures the base image is built and tagged as dynamic-pricing-base before the development container is started
-  // todo: add stat -c '%g' /var/run/docker.sock to the initializeCommand
   "initializeCommand": "sh -c '(echo \"DEVELOPER_UID=$(id -u)\nDEVELOPER_GID=$(id -g)\nDOCKER_GID=$(stat -c '%g' /var/run/docker.sock)\") > .env' && docker build -t dynamic-pricing-base ./dynamic-pricing/",
 
   // Important for docker-outside-of-docker feature to work with project docker compose
