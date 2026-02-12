@@ -102,37 +102,3 @@ docker compose restart dynamic-pricing-worker
 ```
 
 The worker configuration is in `config/queue.yml` and recurring jobs are configured in `config/recurring.yml`. Jobs are stored in a separate SQLite database for the queue.
-
-
-<!-- The following is an older way of interacting with the dockerized environment, some of it still works, but it will be removed and replaced soon -->
-#### dyanmic-pricing rails application
-
-```bash
-
-# change to the dynamic-pricing directory
-cd dynamic-pricing/
-
-# --- 1. Build & Run The Main Application ---
-# Build the Docker image
-docker build -t interview-app .
-
-# Run the service
-docker run -p 3000:3000 -v $(pwd):/rails interview-app
-
-# --- 2. Test The Endpoint ---
-# Send a sample request to your running service
-curl 'http://localhost:3000/pricing?period=Summer&hotel=FloatingPointResort&room=SingletonRoom'
-
-# --- 3. Run Tests ---
-# Run the development container in the background
-docker run -d -p 3000:3000 -v $(pwd):/rails --name interview-dev interview-app
-
-# Run the full test suite
-docker container exec -it interview-dev ./bin/rails test
-
-# Run a specific test file
-docker container exec -it interview-dev ./bin/rails test test/controllers/pricing_controller_test.rb
-
-# Run a specific test by name
-docker container exec -it interview-dev ./bin/rails test test/controllers/pricing_controller_test.rb -n test_should_get_pricing_with_all_parameters
-```
