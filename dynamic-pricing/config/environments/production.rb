@@ -60,6 +60,12 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   config.active_job.queue_adapter = :solid_queue
   config.solid_queue.connects_to = { database: { writing: :queue } }
+  
+  # Solid Queue configuration
+  config.solid_queue.silence_polling = true  # Reduce log noise (default: true)
+  config.solid_queue.preserve_finished_jobs = true  # Keep finished jobs for debugging (default: true)
+  config.solid_queue.clear_finished_jobs_after = 7.days  # Keep jobs for 7 days (default: 1 day)
+  
   # config.active_job.queue_name_prefix = "interview_production"
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to

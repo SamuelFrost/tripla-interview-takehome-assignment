@@ -81,16 +81,12 @@ docker compose exec dynamic-pricing bundle exec rails test
 
 The application uses Solid Queue for background job processing. A recurring job updates hotel room prices every 4.5 minutes.
 
-To start the Solid Queue worker:
+**The worker starts automatically** when you run `docker compose up`. The `dynamic-pricing-worker` service runs Solid Queue's supervisor which manages workers, dispatchers, and the scheduler.
+
+To view worker logs:
 
 ```console
-docker compose exec dynamic-pricing bundle exec rails solid_queue:start
-```
-
-Alternatively, you can use the jobs script:
-
-```console
-docker compose exec dynamic-pricing bin/jobs
+docker compose logs -f dynamic-pricing-worker
 ```
 
 To manually trigger a price update job:
@@ -99,7 +95,13 @@ To manually trigger a price update job:
 docker compose exec dynamic-pricing bundle exec rails runner "UpdateHotelRoomPricesJob.perform_now"
 ```
 
-The recurring job configuration is in `config/recurring.yml`. Jobs are stored in a separate SQLite database for the queue.
+To restart just the worker:
+
+```console
+docker compose restart dynamic-pricing-worker
+```
+
+The worker configuration is in `config/queue.yml` and recurring jobs are configured in `config/recurring.yml`. Jobs are stored in a separate SQLite database for the queue.
 
 
 <!-- The following is an older way of interacting with the dockerized environment, some of it still works, but it will be removed and replaced soon -->
