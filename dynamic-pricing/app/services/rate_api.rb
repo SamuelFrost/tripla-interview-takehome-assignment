@@ -11,10 +11,10 @@ class RateApi
   end
 
   # @param attributes [{ period: String, hotel: String, room: String }] Hotel room attributes
-  # @return [{ period: String, hotel: String, room: String, rate: Decimal }] Hotel room attributes with their rates
+  # @return [{ period: String, hotel: String, room: String, rate: String }] Hotel room attributes with their rates
   # @example
   #   RateApi.new.get_pricing(attributes: [{ period: 'Summer', hotel: 'FloatingPointResort', room: 'SingletonRoom' }, { period: 'Autumn', hotel: 'FloatingPointResort', room: 'SingletonRoom' }])
-  #   # => [{ period: 'Summer', hotel: 'FloatingPointResort', room: 'SingletonRoom', rate: 100 }, { period: 'Autumn', hotel: 'FloatingPointResort', room: 'SingletonRoom', rate: 100 }]
+  #   # => [{ period: 'Summer', hotel: 'FloatingPointResort', room: 'SingletonRoom', rate: '100' }, { period: 'Autumn', hotel: 'FloatingPointResort', room: 'SingletonRoom', rate: '100' }]
   def get_pricing(attributes:)
 
     response = Faraday.post("#{@url}/pricing") do |request|
