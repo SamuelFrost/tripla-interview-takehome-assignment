@@ -79,7 +79,7 @@ docker compose exec dynamic-pricing bundle exec rails test
 
 #### Background Jobs with Solid Queue
 
-The application uses Solid Queue for background job processing. A recurring job updates hotel room prices every 4.5 minutes.
+The application uses Solid Queue for background job processing.
 
 **The worker starts automatically** when you run `docker compose up`. The `dynamic-pricing-worker` service runs Solid Queue's supervisor which manages workers, dispatchers, and the scheduler.
 
