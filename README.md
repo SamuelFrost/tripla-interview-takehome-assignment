@@ -4,7 +4,29 @@ This project is under a custom evaluation license. See [LICENSE](LICENSE) for fu
 
 # Tripla interview takehome assignment
 
-This is a project that uses a Ruby on Rails application for core processes. SQLite is being used as the database.
+<details>
+  <summary>Personalized Supplementary assignment Instructions (click to expand)</summary>
+
+### Supplementary assignment instructions in my own words
+
+The task received was to build a system to reduce the operational costs accessing the compute intensive [rate-api](https://hub.docker.com/r/tripladev/rate-api) which is used to calculate the price of a hotel room for a particular period, hotel, and room type based on current circumstances. Requirements were:
+
+- provide an api endpoint that can be used to get the current price of a hotel room for a particular period, hotel, and room type
+- prices/data from the api is considered valid for 5 minutes
+- the application should use less than 1000 requests to the API per day (to reduce operational costs)
+- the application will receive 10,000+ requests per day (near constant traffic)
+
+The actual received assignment instructions can be found in these files, [Tripla Instructions](TriplaInstructionsReadme.md) and [Specific Assignment Readme](/dynamic-pricing/SpecificAssignmentReadme.md).
+
+The terraform-parse assignment was not requested and was effectively ignored for this project.
+
+</details>
+
+For a simple summary of changes via git comparison of the project from the initial commit to the final commit, access the following link: [git comparison](https://github.com/SamuelFrost/tripla-interview-takehome-assignment/compare/3a79f4906c7910f3292dbce2ce48689b4d695056...main).
+
+## Project Overview
+
+This is a project that uses a Ruby on Rails application for core processes and uses supporting services as part of a multi service architecture. SQLite is being used for the database.
 
 ## Getting Started
 
