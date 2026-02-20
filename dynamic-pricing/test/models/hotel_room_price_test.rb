@@ -26,4 +26,12 @@ class HotelRoomPriceTest < ActiveSupport::TestCase
       assert_equal "62700", HotelRoomPrice.find_by(period: "Summer", hotel: "FloatingPointResort", room: "SingletonRoom").rate
     end
   end
+
+  test "should not change any hotel room prices if the API returns success but rates are nil" do
+    create(:hotel_room_price, period: "Spring", hotel: "FloatingPointResort", room: "BooleanTwin", rate: "51600")
+    VCR.use_cassette("rate_api/get_pricing_nil_rates") do
+      HotelRoomPrice.update_prices
+      assert_equal "51600", HotelRoomPrice.find_by(period: "Spring", hotel: "FloatingPointResort", room: "BooleanTwin").rate
+    end
+  end
 end
