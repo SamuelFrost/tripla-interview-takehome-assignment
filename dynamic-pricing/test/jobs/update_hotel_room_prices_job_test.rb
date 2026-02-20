@@ -34,8 +34,8 @@ class UpdateHotelRoomPricesJobTest < ActiveJob::TestCase
       end
       assert_instance_of RateApi::RateApiError, error, "Expected job to raise RateApi::RateApiError after exhausting retries"
       assert_equal "Failed to get pricing, response status: 500", error.message, "Expected job to raise RateApi::RateApiError after exhausting retries"
-      assert_performed_jobs 3, only: UpdateHotelRoomPricesJob
-      assert_equal performed_jobs.last["exception_executions"],  {"[RateApi::RateApiError, Faraday::TimeoutError, Faraday::ConnectionFailed]"=>3}
+      assert_performed_jobs 6, only: UpdateHotelRoomPricesJob
+      assert_equal performed_jobs.last["exception_executions"],  {"[RateApi::RateApiError, Faraday::TimeoutError, Faraday::ConnectionFailed]"=>6}
     end
   end
 end

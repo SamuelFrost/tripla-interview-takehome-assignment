@@ -19,7 +19,7 @@ class RateApi
   #   # => [{ period: 'Summer', hotel: 'FloatingPointResort', room: 'SingletonRoom', rate: '100' }, { period: 'Autumn', hotel: 'FloatingPointResort', room: 'SingletonRoom', rate: '100' }]
   def get_pricing(attributes:)
     connection = Faraday.new do |f|
-      f.options.timeout = 15
+      f.options.timeout = 33
       f.options.open_timeout = 5
     end
 
