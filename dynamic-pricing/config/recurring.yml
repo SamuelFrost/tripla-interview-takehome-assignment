@@ -13,7 +13,7 @@ default: &default
   update_hotel_room_prices:
     class: UpdateHotelRoomPricesJob
     queue: default
-    schedule: every 4 minutes and 45 seconds
+    schedule: every 4 minutes and 30 seconds
 
 development:
   <<: *default

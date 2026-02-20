@@ -23,9 +23,9 @@ jobs:
     - name: Run the Rails container
       run: docker run -d -p 3000:3000 -v $(pwd):/workspaces/dynamic-pricing --network ci-network -e RATE_API_URL=http://rate-api:8080 -e RATE_API_KEY=04aa6f42aa03f220c2ae9a276cd68c62 --name interview-dev interview-app
     - name: Wait for containers to be ready
-      run: sleep 5
-    - name: Run perform_now job to initialize the hotel room prices
-      run: docker container exec interview-dev ./bin/rails runner "UpdateHotelRoomPricesJob.perform_now"
+      run: sleep 15
+    - name: Run job to initialize the hotel room prices
+      run: docker container exec interview-dev ./bin/rails runner "ActiveJob::Base.queue_adapter = :inline; UpdateHotelRoomPricesJob.perform_later"
     - name: Run all tests
       run: docker container exec interview-dev ./bin/rails test
     - name: Test API endpoint returns 200

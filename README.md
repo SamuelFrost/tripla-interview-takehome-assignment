@@ -111,10 +111,10 @@ To view worker logs:
 docker compose logs -f dynamic-pricing-worker
 ```
 
-To manually trigger a price update job:
+To run the job immediately in this process with full retry logic (no worker needed):
 
 ```bash
-docker compose exec dynamic-pricing bundle exec rails runner "UpdateHotelRoomPricesJob.perform_now"
+docker compose exec dynamic-pricing bundle exec rails runner "ActiveJob::Base.queue_adapter = :inline; UpdateHotelRoomPricesJob.perform_later"
 ```
 
 To restart just the worker:
