@@ -1,11 +1,6 @@
 require "test_helper"
 
 class UpdateHotelRoomPricesJobTest < ActiveJob::TestCase
-  # Use test adapter so perform_enqueued_jobs actually runs jobs (perform_now does not retry)
-  def queue_adapter_for_test
-    ActiveJob::QueueAdapters::TestAdapter.new
-  end
-
   TOTAL_SEASONAL_HOTEL_ROOM_COUNT = RateApi::VALID_PERIODS.count * RateApi::VALID_HOTELS.count * RateApi::VALID_ROOMS.count
 
   test "job calls HotelRoomPrice.update_prices" do
