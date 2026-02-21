@@ -22,7 +22,7 @@ The terraform-parse assignment was not requested and was effectively ignored for
 
 </details>
 
-For a simple summary of changes via git comparison of the project from the initial commit to the final commit, access the following link: [git comparison](https://github.com/SamuelFrost/tripla-interview-takehome-assignment/compare/3a79f4906c7910f3292dbce2ce48689b4d695056...main).
+For a simple summary of changes via git comparison of the project from the initial commit to the final commit, access the following link: [git comparison](https://github.com/SamuelFrost/tripla-interview-takehome-assignment/compare/3a79f4906c7910f3292dbce2ce48689b4d695056...main) and without the initial readme cleanup: [git comparison](https://github.com/SamuelFrost/tripla-interview-takehome-assignment/compare/399c96f0b5b17f0b22417c717e5233645670f938...main).
 
 ## Project Overview
 
